@@ -20,3 +20,8 @@ export class GeoCoordinates {
         return `${this.#latitude},${this.#longitude}`;
     }
 }
+
+
+function getUserLocation() {
+    return {dummy_data: "nothing"};   
+}
