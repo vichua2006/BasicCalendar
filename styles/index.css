@@ -43,7 +43,7 @@ body {
   grid-area: navbar;
   margin: 1rem;
   border-radius: 1rem;
-  padding: 1.25rem;
+  padding: 1rem;
   display: grid;
 
   grid-template-rows: 1.5fr 1fr 1fr 1fr 1fr 3fr;
@@ -59,6 +59,8 @@ body {
   display: grid;
   place-items: center;
   color: rgb(121, 127, 138);
+  font-family: 'Courier New';
+  font-size: 0.75rem;
 }
 
 .current-weather-summary-container {
