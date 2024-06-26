@@ -7,10 +7,32 @@ body {
   margin: 0;
   height: 100vh;
   width: 100%;
+  display: grid;
+  grid-template-areas:
+    'navbar searchbar none'
+    'navbar currentsummary weekforecast'
+    'navbar todayforecast weekforecast'
+    'navbar airconditions weekforecast';
 }
 
 .search-bar {
   background-color: rgb(33, 56, 83);
   border: none;
   color: rgb(172, 179, 190);
+  grid-area: searchbar;
+}
+
+.app-icon-container {
+  display: inline-block;
+  background-color: rgb(57, 66, 80);
+}
+
+.navigation-bar {
+  background-color: rgb(32, 43, 59);
+  grid-area: navbar;
+}
+
+.nav-icon,
+.app-icon {
+  transform: scale(0.5);
 }
