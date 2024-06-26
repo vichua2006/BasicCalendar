@@ -13,6 +13,7 @@ body {
     'navbar currentsummary weekforecast'
     'navbar todayforecast weekforecast'
     'navbar airconditions weekforecast';
+  grid-template-columns: 0.25fr 3fr 2fr;
 }
 
 .search-bar {
@@ -20,19 +21,63 @@ body {
   border: none;
   color: rgb(172, 179, 190);
   grid-area: searchbar;
+  border-radius: 1rem;
+  height: 3rem;
+  margin: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .app-icon-container {
   display: inline-block;
   background-color: rgb(57, 66, 80);
+  border-radius: 1rem;
+  margin-bottom: auto;
+  display: grid;
+  place-items: center;
+  padding: 0.25rem;
 }
 
 .navigation-bar {
   background-color: rgb(32, 43, 59);
   grid-area: navbar;
+  margin: 1rem;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  display: grid;
+
+  grid-template-rows: 1.5fr 1fr 1fr 1fr 1fr 4fr;
 }
 
 .nav-icon,
 .app-icon {
-  transform: scale(0.5);
+  width: 2.5rem;
+  height: auto;
+}
+
+.nav-icon {
+  padding-bottom: 0.3rem;
+}
+
+.nav-icon-container {
+  display: grid;
+  place-items: center;
+  color: rgb(121, 127, 138);
+  margin-bottom: 1.5rem;
+}
+
+.current-weather-summary-container {
+  grid-area: currentsummary;
+}
+
+.today-weather-forecast-container {
+  grid-area: todayforecast;
+}
+
+.air-conditions-container {
+  grid-area: airconditions;
+}
+
+.weekly-forecast-container {
+  grid-area: weekforecast;
 }
