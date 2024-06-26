@@ -1,17 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="styles/index.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="styles/index.css">
+        <script src="./scripts/main.js" type="module"></script>
+    </head>
 
-<body>
-    <div class="weather-app-container">
-        <input type="text" placeholder="Search for cities" class="search-bar">
-    </div>
-</body>
+    <body>
+        <div class="weather-app-container">
+            <nav class="navigation-bar">
+                <div class="app-icon-container">
+                    <img src="images/navigation-bar/app-icon.png" class="app-icon" alt="">
+                </div>
+
+            <div class="nav-icon-container">
+                    <img src="images/navigation-bar/weather.png" class="nav-icon" alt="">
+                <div class="nav-icon-label">Weather</div>
+            </div>
+
+            <div class="nav-icon-container">
+                    <img src="images/navigation-bar/menu.png" class="nav-icon" alt="">
+
+                <div class="nav-icon-label">Cities</div>
+            </div>
+
+            <div class="nav-icon-container">
+                    <img src="images/navigation-bar/map.png" class="nav-icon" alt="">
+                <div class="nav-icon-label">Map</div>
+            </div>
+
+            <div class="nav-icon-container">
+                    <img src="images/navigation-bar/settings.png" class="nav-icon" alt="">
+                <div class="nav-icon-label">Settings</div>
+            </div>
+            </nav>
+
+
+            <div class="search-bar">
+
+                <input type="text" placeholder="Search for cities" class="js-input-box">
+                <div class="js-result-box">
+                    <ul>
+                        <li>JavaScript</li>
+                        <li>Web Dev</li>
+                    </ul>
+                </div>
+            </div>
+        <div class="current-weather-summary-container"></div>
+        <div class="today-weather-forecast-container"></div>
+        <div class="air-conditions-container"></div>
+        <div class="weekly-forecast-container"></div>
+        </div>
+    </body>
 
 </html>
