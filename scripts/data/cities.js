@@ -33,12 +33,12 @@ export var cities = [
 ];
 
 export class City {
-    #name;
+    #searchName;
     #geoData;
     #weatherData;
 
     constructor(cityName) {
-        this.#name = cityName;
+        this.#searchName = cityName;
     }
 
     async updateAllData() {
@@ -50,7 +50,7 @@ export class City {
     async updateGeoData() {
         // calls API to obtain city's geographical information
         try {
-            const response = await fetch(`https://singlesearch.alk.com/NA/api/search?authToken=${geocodingApiKey}&query="${this.#name}"`);
+            const response = await fetch(`https://singlesearch.alk.com/NA/api/search?authToken=${geocodingApiKey}&query="${this.#searchName}"`);
             
             if (!response.ok) {
                 throw new Error("Geo API response not ok");
@@ -96,8 +96,24 @@ export class City {
         return this.#weatherData;
     }
 
-    getCurrTemp() {
+    getCityName(){
+        return this.#weatherData.location.name;
+    }
+
+    getCurrTempC() {
         return this.#weatherData.current.temp_c;
+    }
+
+    getFeelsLikeC() {
+        return this.#weatherData.current.feelslike_c;
+    }
+
+    getWindKPH() {
+        return this.#weatherData.current.wind_kph;
+    }
+
+    getUVIndex() {
+        return this.#weatherData.current.uv;
     }
 }
 

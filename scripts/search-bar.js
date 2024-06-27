@@ -25,4 +25,5 @@ function displayResults(results, num = 5) {
   }
   resultBox.style.display = results.length === 0 ? 'none' : 'block';
   resultBox.innerHTML = `<ul>${resultHTML}</ul>`;
+  
 }
