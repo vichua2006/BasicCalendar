@@ -21,10 +21,12 @@ function renderPage(newCity){
     const windKPH = newCity.getWindKPH();
     document.querySelector(".js-wind-kph").innerHTML = `${windKPH} km/h`;
 
+    // document.querySelector(".js-today-forcast-container")
+    //     .innerHTML = newCity.generateTodayHTML();
 }
 
 initSearchBar(cities);
-const newCity = new City("Toronto");
+const newCity = new City("Vancouver, BC");
 await newCity.updateAllData();
 console.log(newCity.getWeatherData());
 

@@ -1,5 +1,4 @@
-import { assert } from "../utils.js";
-
+import { getIconFileName } from "../icons.js";
 
 const weatherApiKey = "e0f946d1c2eb46e281a161411242706"; // Weather API (https://www.weatherapi.com/) 
 const geocodingApiKey = "CD42F9D5E5CED1419FB6D560A459490A"; // Trimble maps
@@ -83,6 +82,40 @@ export class City {
         catch(error) {
             console.log(error);
         }
+    }
+
+    generateTodayHTML() {
+        const todayForcast = this.#getForcastForDay(0);
+        const hourForcast = todayForcast.hour;
+        
+        let todayHTML = "";
+        for (let i=6;i<=21;i+=3) {
+            const hour = hourForcast[i];
+            const date = new Date(hour.time);
+            const iconFileName = getIconFileName(hour.condition.code);
+
+            const hourHTML = `
+                <div class="today-forecast">
+                    <div class="today-forecast-time">
+                        ${date.toLocaleTimeString()}
+                    </div>
+                    <div class="today-forecast-image">
+                        <img src="images/weather-conditions/${iconFileName}" alt="">
+                    </div>
+                    <div class="today-forecast-temperature">
+                        ${hour.temp_c}&deg
+                    </div>
+                </div> 
+            `
+
+            todayHTML += hourHTML;
+        }
+
+        return todayHTML;
+    }
+
+    #getForcastForDay(nDaysAhead) {
+        return this.#weatherData.forecast.forecastday[nDaysAhead] || null;
     }
 
     getLatLng() {
