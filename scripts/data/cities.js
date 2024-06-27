@@ -39,21 +39,24 @@ export class City {
 
     constructor(cityName) {
         this.#name = cityName;
-        this.updateGeoData(); 
+    }
+
+    async updateAllData() {
+        await this.updateGeoData();
+        await this.updateWeatherData();
     }
 
     async updateGeoData() {
         // calls API to obtain city's geographical information
         try {
-            const resposne = await fetch(`https://singlesearch.alk.com/NA/api/search?authToken=${geocodingApiKey}&query="${this.#name}"`);
+            const response = await fetch(`https://singlesearch.alk.com/NA/api/search?authToken=${geocodingApiKey}&query="${this.#name}"`);
             
-            if (!resposne.ok) {
+            if (!response.ok) {
                 throw new Error("Geo API response not ok");
             }
 
-            this.#geoData = await resposne.json();
-
-            console.log(this.#geoData);
+            const responseJson = await response.json();
+            this.#geoData = responseJson.Locations[0];
 
         } catch (error){
             console.log(error);
@@ -64,7 +67,9 @@ export class City {
 
         try {
 
-            const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=${weatherApiKey}&q=${"random text"}&aqi=no`);
+            const coords = this.getLatLng();
+            const lat = Number(coords.Lat), lng = Number(coords.Lon);
+            const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=${weatherApiKey}&q=${lat},${lng}&aqi=no`);
 
             if (!response.ok){
                 throw new Error("Weather API response not ok");
@@ -72,7 +77,6 @@ export class City {
 
             this.#weatherData = await response.json();
 
-            console.log(weatherData);
         }
         catch(error) {
             console.log(error);
@@ -80,8 +84,19 @@ export class City {
     }
 
     getLatLng() {
-        
-        return ;
+        // returns an object with two properties: lat and lng; coordinates are in string
+        const coords = this.#geoData.Coords;
+        if (!coords) throw new Error("Unable to load lat/lng coordinates from geoData");
+
+        return coords;
+    }
+    
+    getWeatherData() {
+        return this.#weatherData;
+    }
+
+    getCurrTemp() {
+        return this.#weatherData.current.temp_c;
     }
 }
 
