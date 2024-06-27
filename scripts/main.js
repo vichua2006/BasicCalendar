@@ -18,9 +18,8 @@ export function renderPage(newCity){
     document.querySelector('.js-temperature-label').innerHTML = `${currTemp}°C`;
 
     const feelsLike = newCity.getFeelsLikeC();
-    document.querySelector(
-        '.js-feelslike-temperature'
-    ).innerHTML = `${feelsLike}°C`;
+    document.querySelector('.js-feelslike-temperature')
+        .innerHTML = `${feelsLike}°C`;
 
     const UVIndex = newCity.getUVIndex();
     document.querySelector('.js-uv-index').innerHTML = UVIndex;
