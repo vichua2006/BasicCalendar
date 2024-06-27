@@ -1,16 +1,16 @@
-import { cities } from "./data/cities.js";
 
 const resultBox = document.querySelector(".js-result-box");
 const inputBox = document.querySelector(".js-input-box");
 
 
-export function initSearchBar() {
+export function initSearchBar(array) {
 
+    // set listener for search bar
     inputBox.addEventListener("keyup", () => {
         let results = [];
         let input = inputBox.value;
         if (input.length) {
-            results = cities.filter((keyWord) => {
+            results = array.filter((keyWord) => {
                 return keyWord.toLowerCase().includes(input.toLowerCase());
             });
         }
