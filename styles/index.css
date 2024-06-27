@@ -12,7 +12,7 @@ body {
   width: 100%;
   display: grid;
   grid-template-areas:
-    'navbar searchbar none'
+    'navbar searchbar weekforecast'
     'navbar currentsummary weekforecast'
     'navbar todayforecast weekforecast'
     'navbar airconditions weekforecast';
@@ -136,11 +136,23 @@ body {
 .today-forecast-items-container {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
+  position: relative;
 }
 
 .today-forecast {
   display: grid;
   justify-content: center;
+  position: relative;
+}
+
+.today-forecast:not(:first-child)::before {
+  content: '';
+  background-color: white;
+  height: 100%;
+  width: 1px;
+  position: absolute;
+  left: 0;
+  transform: translateX(-50%);
 }
 
 .today-forecast-time {
@@ -175,10 +187,6 @@ body {
   background-color: rgb(32, 43, 59);
   border-radius: 1rem;
   height: 227px;
-}
-
-.air .weekly-forecast-container {
-  grid-area: weekforecast;
 }
 
 .air-conditions-cell {
@@ -232,4 +240,64 @@ body {
   font-size: 1rem;
   font-weight: bold;
   align-self: center;
+}
+
+.weekly-forecast-weather-condition-image {
+  width: 55px;
+  display: inline-block;
+}
+
+.weekly-forecast-day-label {
+  display: inline;
+}
+
+.weekly-forecast-weather-condition-label {
+  display: inline;
+}
+
+.weekly-forecast-temperature {
+  display: inline;
+}
+
+.weekly-forecast-container {
+  display: grid;
+  grid-template-rows: repeat(8, 1fr);
+  background-color: rgb(32, 43, 59);
+  grid-area: weekforecast;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem;
+  margin-top: 5rem;
+  position: relative;
+  gap: 10px;
+}
+
+.weekly-forecast-cell {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  font-size: 1rem;
+  position: relative;
+}
+
+.weekly-forecast-cell:not(:first-child):not(:last-child)::before {
+  content: '';
+  background-color: white;
+  height: 1px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+}
+
+.weekly-forecast-high-temperature-label {
+  font-weight: bold;
+  color: white;
+}
+
+.weekly-forecast-label {
+  font-size: 2rem;
+  font-weight: bold;
+  align-self: center;
+  justify-self: center;
 }
