@@ -94,6 +94,7 @@ export class City {
             const date = new Date(hour.time);
             const iconFileName = getIconFileName(hour.condition.code);
 
+            // TODO: find a way to format toLocaleTimeString correct to fix html formatting
             const hourHTML = `
                 <div class="today-forecast">
                     <div class="today-forecast-time">
