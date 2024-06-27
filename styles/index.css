@@ -38,6 +38,11 @@ body {
   position: absolute;
   z-index: 2;
   font-size: 1.1rem;
+  background-color: rgb(32, 43, 59);
+  margin-left: 1rem;
+  border-radius: 1rem;
+  display: none;
+  padding-right: 2rem;
 }
 
 .app-icon-container {
@@ -300,4 +305,17 @@ body {
   font-weight: bold;
   align-self: center;
   justify-self: center;
+}
+
+ul:hover {
+  cursor: pointer;
+}
+
+li:hover {
+  background-color: grey;
+}
+
+li {
+  padding: 0.7rem;
+  border-radius: 1rem;
 }
