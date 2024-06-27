@@ -82,16 +82,6 @@ export class City {
     }
   }
 
-  generateTodayHTML() {
-    const todayForcast = this.#getForcastForDay(0);
-    const hourForcast = todayForcast.hour;
-
-    let todayHTML = '';
-    for (let i = 6; i <= 21; i += 3) {
-      const hour = hourForcast[i];
-      const date = new Date(hour.time);
-      const iconFileName = getIconFileName(hour.condition.code);
-
 
     generateTodayHTML() {
         const todayForcast = this.#getForcastForDay(0);
@@ -127,6 +117,35 @@ export class City {
     }
 
     return todayHTML;
+  }
+
+  generateSevenDayHTML() {
+    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+    let sevenDayHTML = `<div class="weekly-forecast-label">7-Day Forecast</div>`;
+    for (let forecast of this.#weatherData.forecast.forecastday){
+       const day = forecast.day;
+       const date = new Date(forecast.date);
+       const iconFileName = getIconFileName(day.condition.code);
+ 
+       const dayHTML = `
+            <div class="weekly-forecast-cell">
+                <div class="weekly-forecast-day-label">${weekday[date.getDay()]}</div>
+                <img class="weekly-forecast-weather-condition-image" src="images/weather-conditions/${iconFileName}" alt="">
+                <div class="weekly-forecast-weather-condition-label">${day.condition.text}</div>
+                <div class="weekly-forecast-temperature">
+                    <span class="weekly-forecast-high-temperature-label">
+                        ${day.maxtemp_c.toFixed()}
+                    </span>
+                        /${day.mintemp_c.toFixed()}
+                </div>
+            </div>
+       `;
+
+       sevenDayHTML += dayHTML;
+    } 
+
+    return sevenDayHTML;
   }
 
   #getForcastForDay(nDaysAhead) {
@@ -168,5 +187,10 @@ export class City {
 
   getUVIndex() {
     return this.#weatherData.current.uv;
+  }
+
+  getChanceOfRain() {
+    const day = this.#getForcastForDay(0);
+    return day.day.daily_chance_of_rain;
   }
 }
