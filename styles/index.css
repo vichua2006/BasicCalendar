@@ -1,5 +1,8 @@
 body {
   margin: 0;
+  font-family: 'Courier New';
+  font-size: 0.75rem;
+  color: rgb(121, 127, 138);
 }
 
 .weather-app-container {
@@ -14,6 +17,7 @@ body {
     'navbar todayforecast weekforecast'
     'navbar airconditions weekforecast';
   grid-template-columns: 0.25fr 2fr 1fr;
+  grid-template-rows: 100px 250px 1fr 1fr;
 }
 
 .search-bar {
@@ -26,11 +30,13 @@ body {
   margin: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
-  width: 100%;
+  width: 800px;
 }
 
 .result-box {
   color: rgb(121, 127, 138);
+  position: absolute;
+  z-index: 2;
 }
 
 .app-icon-container {
@@ -60,6 +66,17 @@ body {
   height: auto;
 }
 
+.nav-icon-weather {
+  width: 3rem;
+  height: auto;
+}
+
+.nav-icon-label-weather {
+  color: white;
+  font-weight: bolder;
+  font-size: 0.9rem;
+}
+
 .nav-icon-container {
   display: grid;
   place-items: center;
@@ -70,10 +87,78 @@ body {
 
 .current-weather-summary-container {
   grid-area: currentsummary;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    'city image'
+    'temperature image';
+  justify-items: center;
+  align-items: center;
+  margin-bottom: 2rem;
 }
 
-.today-weather-forecast-container {
+.city-label {
+  color: white;
+  font-family: 'Courier New';
+  font-size: 2.5rem;
+  grid-area: city;
+  font-weight: bold;
+}
+.temperature-label {
+  color: white;
+  font-family: 'Courier New';
+  font-size: 2.5rem;
+  grid-area: temperature;
+  font-weight: bold;
+}
+
+.weather-condition-image-container {
+  grid-area: image;
+}
+
+.weather-condition-image {
+  width: 200px;
+  height: auto;
+  grid-area: image;
+}
+
+.today-forecast-container {
   grid-area: todayforecast;
+  background-color: rgb(32, 43, 59);
+  border-radius: 1rem;
+  padding: 2rem;
+}
+
+.today-forecast-items-container {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.today-forecast {
+  display: grid;
+  justify-content: center;
+}
+
+.today-forecast-time {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.today-forecast-temperature {
+  font-weight: bolder;
+  font-size: 2rem;
+  color: white;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.today-forecast-label {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 .air-conditions-container {
@@ -82,4 +167,8 @@ body {
 
 .weekly-forecast-container {
   grid-area: weekforecast;
+}
+
+.today-forecast-image img {
+  width: 75px;
 }
