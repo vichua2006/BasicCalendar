@@ -22,8 +22,14 @@ function displayResults(results, num = 5) {
   // TODO: display however many generated, but limit number generated?
   let resultHTML = '';
   for (let i = 0; i < Math.min(num, results.length); i++) {
-    resultHTML += `<li>${results[i]}</li>\n`;
+    resultHTML += `<li class="js-search-suggestion" data-search-suggestion="${results[i]}">${results[i]}</li>\n`;
   }
+  //   console.log('clicked');
   resultBox.style.display = results.length === 0 ? 'none' : 'block';
   resultBox.innerHTML = `<ul>${resultHTML}</ul>`;
+  document.querySelectorAll('.js-search-suggestion').forEach((suggestion) => {
+    suggestion.addEventListener('click', () => {
+      console.log(suggestion.dataset.searchSuggestion);
+    });
+  });
 }
