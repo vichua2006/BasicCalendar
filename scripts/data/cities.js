@@ -42,6 +42,7 @@ export class City {
     }
 
     async updateAllData() {
+        // must be called before using other methods; use await
         await this.updateGeoData();
         await this.updateWeatherData();
     }
