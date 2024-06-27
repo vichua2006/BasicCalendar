@@ -9,6 +9,7 @@
     <script src="scripts/main.js" type="module"></script>
 </head>
 
+
 <body>
     <div class="weather-app-container">
         <nav class="navigation-bar">
@@ -39,7 +40,16 @@
         </nav>
 
 
-        <input type="text" placeholder="Search for cities" class="search-bar">
+        <div class="search-bar">
+
+            <input type="text" placeholder="Search for cities" class="js-input-box">
+            <div class="js-result-box">
+                <ul>
+                    <li>JavaScript</li>
+                    <li>Web Dev</li>
+                </ul>
+            </div>
+        </div>
         <div class="current-weather-summary-container"></div>
         <div class="today-weather-forecast-container"></div>
         <div class="air-conditions-container"></div>
