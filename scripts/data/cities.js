@@ -108,6 +108,10 @@ export class City {
         return this.#weatherData.current.feelslike_c;
     }
 
+    getWeatherCode() {
+        return this.#weatherData.current.condition.code;
+    }
+
     getWindKPH() {
         return this.#weatherData.current.wind_kph;
     }
