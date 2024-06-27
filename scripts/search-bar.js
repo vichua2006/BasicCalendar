@@ -1,3 +1,5 @@
+import { City } from "./data/cities.js";
+import { renderPage } from "./main.js";
 const resultBox = document.querySelector('.js-result-box');
 const inputBox = document.querySelector('.js-input-box');
 
@@ -26,8 +28,13 @@ function displayResults(results, num = 5) {
   resultBox.style.display = results.length === 0 ? 'none' : 'block';
   resultBox.innerHTML = `<ul>${resultHTML}</ul>`;
   document.querySelectorAll('.js-search-suggestion').forEach((suggestion) => {
-    suggestion.addEventListener('click', () => {
-      console.log(suggestion.dataset.searchSuggestion);
+    suggestion.addEventListener('click', async () => {
+    //   console.log(suggestion.dataset.searchSuggestion);
+      const name = suggestion.dataset.searchSuggestion;
+
+      const city = new City(name);
+      await city.updateAllData();
+      renderPage(city);
     });
   });
 }

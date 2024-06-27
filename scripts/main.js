@@ -2,9 +2,10 @@ import { initSearchBar } from './search-bar.js';
 import { cities, City } from './data/cities.js';
 import { getIconFileName } from './icons.js';
 
-function renderPage(newCity) {
-  const cityName = newCity.getCityName();
-  document.querySelector('.js-city-label').innerHTML = cityName;
+
+export function renderPage(newCity){
+    const cityName = newCity.getCityName();
+    document.querySelector(".js-city-label").innerHTML = cityName;
 
   const iconFileName = getIconFileName(newCity.getWeatherCode());
   document.querySelector(
@@ -25,8 +26,9 @@ function renderPage(newCity) {
   const windKPH = newCity.getWindKPH();
   document.querySelector('.js-wind-kph').innerHTML = `${windKPH} km/h`;
 
-  document.querySelector('.js-today-forcast-container').innerHTML =
-    newCity.generateTodayHTML();
+
+   document.querySelector('.js-today-forcast-container')
+        .innerHTML = newCity.generateTodayHTML();
 }
 
 initSearchBar(cities);

@@ -92,7 +92,20 @@ export class City {
       const date = new Date(hour.time);
       const iconFileName = getIconFileName(hour.condition.code);
 
-      const hourHTML = `
+
+    generateTodayHTML() {
+        const todayForcast = this.#getForcastForDay(0);
+        const hourForcast = todayForcast.hour;
+        
+        let todayHTML = "";
+        for (let i=6;i<=21;i+=3) {
+            const hour = hourForcast[i];
+            const date = new Date(hour.time);
+            const iconFileName = getIconFileName(hour.condition.code);
+
+            // TODO: find a way to format toLocaleTimeString correct to fix html formatting
+            const hourHTML = `
+
                 <div class="today-forecast">
                     <div class="today-forecast-time">
                         ${date.toLocaleTimeString([], {
