@@ -1,7 +1,7 @@
 import { assert } from "../utils.js";
 
 
-const weatherApiKey = "1032b7270496479e819154348242606"; // Weather API (https://www.weatherapi.com/) 
+const weatherApiKey = "e0f946d1c2eb46e281a161411242706"; // Weather API (https://www.weatherapi.com/) 
 const geocodingApiKey = "CD42F9D5E5CED1419FB6D560A459490A"; // Trimble maps
 
 
@@ -44,6 +44,7 @@ export class City {
     async updateAllData() {
         // must be called before using other methods; use await
         await this.updateGeoData();
+        // await Promise.all([this.updateWeatherData(), this.updateForcastData()]);
         await this.updateWeatherData();
     }
 
@@ -70,10 +71,10 @@ export class City {
 
             const coords = this.getLatLng();
             const lat = Number(coords.Lat), lng = Number(coords.Lon);
-            const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=${weatherApiKey}&q=${lat},${lng}&aqi=no`);
+            const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${weatherApiKey}&q=${lat},${lng}&days=7&aqi=no&alert=no`);
 
             if (!response.ok){
-                throw new Error("Weather API response not ok");
+                throw new Error("Weather API (Current) response not ok");
             }
 
             this.#weatherData = await response.json();
