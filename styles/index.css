@@ -6,18 +6,18 @@ body {
 }
 
 .weather-app-container {
-  background-color: rgb(15, 34, 58);
+  background-color: rgb(11, 19, 30);
   margin: 0;
   height: 100vh;
   width: 100%;
   display: grid;
   grid-template-areas:
-    'navbar searchbar none'
+    'navbar searchbar weekforecast'
     'navbar currentsummary weekforecast'
     'navbar todayforecast weekforecast'
     'navbar airconditions weekforecast';
   grid-template-columns: 0.25fr 2fr 1fr;
-  grid-template-rows: 100px 250px 1fr 1fr;
+  grid-template-rows: 100px 200px 1fr 1fr;
 }
 
 .search-bar {
@@ -30,13 +30,14 @@ body {
   margin: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
-  width: 800px;
+  width: 900px;
 }
 
 .result-box {
-  color: rgb(121, 127, 138);
+  color: yellow;
   position: absolute;
   z-index: 2;
+  font-size: 1.1rem;
 }
 
 .app-icon-container {
@@ -104,6 +105,7 @@ body {
   font-size: 2.5rem;
   grid-area: city;
   font-weight: bold;
+  align-self: start;
 }
 .temperature-label {
   color: white;
@@ -111,6 +113,7 @@ body {
   font-size: 2.5rem;
   grid-area: temperature;
   font-weight: bold;
+  align-self: end;
 }
 
 .weather-condition-image-container {
@@ -118,7 +121,7 @@ body {
 }
 
 .weather-condition-image {
-  width: 200px;
+  width: 150px;
   height: auto;
   grid-area: image;
 }
@@ -127,17 +130,29 @@ body {
   grid-area: todayforecast;
   background-color: rgb(32, 43, 59);
   border-radius: 1rem;
-  padding: 2rem;
+  padding: 1.5rem;
 }
 
 .today-forecast-items-container {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
+  position: relative;
 }
 
 .today-forecast {
   display: grid;
   justify-content: center;
+  position: relative;
+}
+
+.today-forecast:not(:first-child)::before {
+  content: '';
+  background-color: white;
+  height: 100%;
+  width: 1px;
+  position: absolute;
+  left: 0;
+  transform: translateX(-50%);
 }
 
 .today-forecast-time {
@@ -153,6 +168,7 @@ body {
   color: white;
   text-align: center;
   margin-top: 1rem;
+  padding-left: 10px;
 }
 
 .today-forecast-label {
@@ -163,12 +179,125 @@ body {
 
 .air-conditions-container {
   grid-area: airconditions;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 35px 85px 85px;
+  margin-top: 1rem;
+  padding-left: 1.5rem;
+  background-color: rgb(32, 43, 59);
+  border-radius: 1rem;
+  height: 227px;
 }
 
-.weekly-forecast-container {
-  grid-area: weekforecast;
+.air-conditions-cell {
+  display: grid;
+  grid-template-columns: 40px 1fr 3fr;
 }
 
 .today-forecast-image img {
-  width: 75px;
+  width: 60px;
+}
+
+.air-conditions-temperature {
+  justify-self: center;
+  align-self: center;
+  font-size: 3rem;
+  font-weight: bolder;
+  padding-left: 1rem;
+}
+
+.air-conditions-label {
+  font-weight: bold;
+  align-self: center;
+  font-size: 1rem;
+  justify-self: start;
+  margin-top: 9px;
+}
+
+.see-more-button {
+  box-sizing: content-box;
+  width: 80px;
+  height: 30px;
+  justify-self: end;
+  align-self: center;
+  background-color: rgb(3, 149, 255);
+  color: white;
+  border-radius: 1rem;
+  border: none;
+  padding: 0px;
+  margin-top: 12px;
+  margin-right: 9px;
+}
+
+.air-conditions-image {
+  display: inline;
+  width: 40px;
+  align-self: center;
+}
+
+.air-conditions-cell-label {
+  display: inline;
+  font-size: 1rem;
+  font-weight: bold;
+  align-self: center;
+}
+
+.weekly-forecast-weather-condition-image {
+  width: 55px;
+  display: inline-block;
+}
+
+.weekly-forecast-day-label {
+  display: inline;
+}
+
+.weekly-forecast-weather-condition-label {
+  display: inline;
+}
+
+.weekly-forecast-temperature {
+  display: inline;
+}
+
+.weekly-forecast-container {
+  display: grid;
+  grid-template-rows: repeat(8, 1fr);
+  background-color: rgb(32, 43, 59);
+  grid-area: weekforecast;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem;
+  margin-top: 5rem;
+  position: relative;
+  gap: 10px;
+}
+
+.weekly-forecast-cell {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  font-size: 1rem;
+  position: relative;
+}
+
+.weekly-forecast-cell:not(:first-child):not(:last-child)::before {
+  content: '';
+  background-color: white;
+  height: 1px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+}
+
+.weekly-forecast-high-temperature-label {
+  font-weight: bold;
+  color: white;
+}
+
+.weekly-forecast-label {
+  font-size: 2rem;
+  font-weight: bold;
+  align-self: center;
+  justify-self: center;
 }

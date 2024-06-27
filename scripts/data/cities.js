@@ -1,7 +1,6 @@
-import { assert } from "../utils.js";
+import { getIconFileName } from "../icons.js";
 
-
-const weatherApiKey = "1032b7270496479e819154348242606"; // Weather API (https://www.weatherapi.com/) 
+const weatherApiKey = "e0f946d1c2eb46e281a161411242706"; // Weather API (https://www.weatherapi.com/) 
 const geocodingApiKey = "CD42F9D5E5CED1419FB6D560A459490A"; // Trimble maps
 
 
@@ -33,24 +32,25 @@ export var cities = [
 ];
 
 export class City {
-    #name;
+    #searchName;
     #geoData;
     #weatherData;
 
     constructor(cityName) {
-        this.#name = cityName;
+        this.#searchName = cityName;
     }
 
     async updateAllData() {
         // must be called before using other methods; use await
         await this.updateGeoData();
+        // await Promise.all([this.updateWeatherData(), this.updateForcastData()]);
         await this.updateWeatherData();
     }
 
     async updateGeoData() {
         // calls API to obtain city's geographical information
         try {
-            const response = await fetch(`https://singlesearch.alk.com/NA/api/search?authToken=${geocodingApiKey}&query="${this.#name}"`);
+            const response = await fetch(`https://singlesearch.alk.com/NA/api/search?authToken=${geocodingApiKey}&query="${this.#searchName}"`);
             
             if (!response.ok) {
                 throw new Error("Geo API response not ok");
@@ -70,10 +70,10 @@ export class City {
 
             const coords = this.getLatLng();
             const lat = Number(coords.Lat), lng = Number(coords.Lon);
-            const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=${weatherApiKey}&q=${lat},${lng}&aqi=no`);
+            const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${weatherApiKey}&q=${lat},${lng}&days=7&aqi=no&alert=no`);
 
             if (!response.ok){
-                throw new Error("Weather API response not ok");
+                throw new Error("Weather API (Current) response not ok");
             }
 
             this.#weatherData = await response.json();
@@ -82,6 +82,40 @@ export class City {
         catch(error) {
             console.log(error);
         }
+    }
+
+    generateTodayHTML() {
+        const todayForcast = this.#getForcastForDay(0);
+        const hourForcast = todayForcast.hour;
+        
+        let todayHTML = "";
+        for (let i=6;i<=21;i+=3) {
+            const hour = hourForcast[i];
+            const date = new Date(hour.time);
+            const iconFileName = getIconFileName(hour.condition.code);
+
+            const hourHTML = `
+                <div class="today-forecast">
+                    <div class="today-forecast-time">
+                        ${date.toLocaleTimeString()}
+                    </div>
+                    <div class="today-forecast-image">
+                        <img src="images/weather-conditions/${iconFileName}" alt="">
+                    </div>
+                    <div class="today-forecast-temperature">
+                        ${hour.temp_c}&deg
+                    </div>
+                </div> 
+            `
+
+            todayHTML += hourHTML;
+        }
+
+        return todayHTML;
+    }
+
+    #getForcastForDay(nDaysAhead) {
+        return this.#weatherData.forecast.forecastday[nDaysAhead] || null;
     }
 
     getLatLng() {
@@ -96,8 +130,28 @@ export class City {
         return this.#weatherData;
     }
 
-    getCurrTemp() {
+    getCityName(){
+        return this.#weatherData.location.name;
+    }
+
+    getCurrTempC() {
         return this.#weatherData.current.temp_c;
+    }
+
+    getFeelsLikeC() {
+        return this.#weatherData.current.feelslike_c;
+    }
+
+    getWeatherCode() {
+        return this.#weatherData.current.condition.code;
+    }
+
+    getWindKPH() {
+        return this.#weatherData.current.wind_kph;
+    }
+
+    getUVIndex() {
+        return this.#weatherData.current.uv;
     }
 }
 
