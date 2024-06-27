@@ -26,6 +26,11 @@ body {
   margin: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
+  width: 100%;
+}
+
+.result-box {
+  color: rgb(121, 127, 138);
 }
 
 .app-icon-container {
