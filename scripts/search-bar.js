@@ -9,7 +9,6 @@ let results = [];
 let suggestionSelected = 0;
 
 async function getSuggestions(userInput) {
-  //   const APIKey = 'AIzaSyC-upsb0S4xm1Ee98_7L0w6AQkBd8Hx1gQ';
 
   const request = {
     textQuery: userInput,
