@@ -132,7 +132,7 @@ export class City {
     let sevenDayHTML = `<div class="weekly-forecast-label">7-Day Forecast</div>`;
     for (let forecast of this.#weatherData.forecast.forecastday) {
       const day = forecast.day;
-      const date = new Date(forecast.date);
+      const date = new Date(forecast.date + "T00:00:00");
       const iconFileName = getIconFileName(day.condition.code);
 
       const dayHTML = `
