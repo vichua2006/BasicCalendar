@@ -6,15 +6,57 @@ const inputBox = document.querySelector('.js-input-box');
 let upFired = false;
 let downFired = false;
 let results = [];
+let suggestionSelected = 0;
 
 export function initSearchBar(array) {
-  inputBox.addEventListener('keyup', (event) => {
+  inputBox.addEventListener('keydown', (event) => {
+    if (
+      event.key === 'ArrowUp' ||
+      event.key === 'ArrowDown' ||
+      event.key === 'Enter'
+    )
+      return;
     let input = inputBox.value;
     if (input.length) {
       results = array.filter((keyWord) => {
         return keyWord.toLowerCase().includes(input.toLowerCase());
       });
     }
+
+    displayResults(results);
+    suggestionSelected = 0;
+  });
+  inputBox.addEventListener('keydown', (e) => {
+    const numberOfResultsShown = Math.min(5, results.length);
+    document.querySelector(
+      `.js-search-suggestion-${results[suggestionSelected].split(',')[0]}`
+    ).style.backgroundColor = 'rgb(32, 43, 59)';
+    switch (e.key) {
+      case 'ArrowUp':
+        suggestionSelected -= 1;
+        if (suggestionSelected < 0) suggestionSelected += numberOfResultsShown;
+        break;
+      case 'ArrowDown':
+        suggestionSelected += 1;
+        if (suggestionSelected >= numberOfResultsShown)
+          suggestionSelected -= numberOfResultsShown;
+        break;
+      case 'Enter':
+        const name = document.querySelector(
+          `.js-search-suggestion-${results[suggestionSelected].split(',')[0]}`
+        ).dataset.searchSuggestion;
+        searchResultSelected(name);
+        break;
+    }
+    document.querySelector(
+      `.js-search-suggestion-${results[suggestionSelected].split(',')[0]}`
+    ).style.backgroundColor = 'grey';
+  });
+
+  inputBox.addEventListener('blur', () => {
+    resultBox.style.display = 'none';
+  });
+  inputBox.addEventListener('focus', () => {
     displayResults(results);
   });
 }
@@ -45,7 +87,7 @@ function displayResults(results, num = 5) {
   resultBox.innerHTML = `<ul>${resultHTML}</ul>`;
 
   document.querySelectorAll('.js-search-suggestion').forEach((suggestion) => {
-    suggestion.addEventListener('click', async () => {
+    suggestion.addEventListener('mousedown', async () => {
       const name = suggestion.dataset.searchSuggestion;
       searchResultSelected(name);
     });

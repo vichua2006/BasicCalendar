@@ -31,6 +31,7 @@ body {
   padding-left: 1rem;
   padding-right: 1rem;
   width: 900px;
+  box-shadow: 1px 1px 8px 1px;
 }
 
 .result-box {
@@ -43,6 +44,7 @@ body {
   border-radius: 1rem;
   display: none;
   padding-right: 2rem;
+  box-shadow: 1px 1px 8px 1px;
 }
 
 .app-icon-container {
@@ -62,7 +64,7 @@ body {
   border-radius: 1rem;
   padding: 1rem;
   display: grid;
-
+  /* box-shadow: 1px 1px 8px 1px; */
   grid-template-rows: 1.5fr 1fr 1fr 1fr 1fr 3fr;
 }
 
@@ -136,6 +138,7 @@ body {
   background-color: rgb(32, 43, 59);
   border-radius: 1rem;
   padding: 1.5rem;
+  /* box-shadow: 1px 1px 8px 1px; */
 }
 
 .today-forecast-items-container {
@@ -192,6 +195,7 @@ body {
   background-color: rgb(32, 43, 59);
   border-radius: 1rem;
   height: 227px;
+  /* box-shadow: 1px 1px 8px 1px; */
 }
 
 .air-conditions-cell {
@@ -275,6 +279,7 @@ body {
   margin-top: 5rem;
   position: relative;
   gap: 10px;
+  /* box-shadow: 1px 1px 8px 1px; */
 }
 
 .weekly-forecast-cell {
@@ -311,6 +316,10 @@ ul:hover {
   cursor: pointer;
 }
 
+ul {
+  list-style-type: none;
+}
+
 li:hover {
   background-color: grey;
 }
@@ -318,4 +327,8 @@ li:hover {
 li {
   padding: 0.7rem;
   border-radius: 1rem;
+}
+
+.js-search-suggestion-select {
+  background-color: grey;
 }
