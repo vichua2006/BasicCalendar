@@ -2,13 +2,27 @@ import { City } from './data/cities.js';
 import { renderPage } from './main.js';
 const resultBox = document.querySelector('.js-result-box');
 const inputBox = document.querySelector('.js-input-box');
+const { Place } = await google.maps.importLibrary('places');
 
-let upFired = false;
-let downFired = false;
 let results = [];
 let suggestionSelected = 0;
 
+async function getSuggestions(userInput) {
+  //   const APIKey = 'AIzaSyC-upsb0S4xm1Ee98_7L0w6AQkBd8Hx1gQ';
+
+  const request = {
+    textQuery: userInput,
+    fields: ['displayName'],
+    language: 'en-US',
+    maxResultCount: 5,
+    includedType: 'locality',
+  };
+  const { places } = await Place.searchByText(request);
+  console.log(places);
+}
+
 export function initSearchBar(array) {
+  getSuggestions('mumbai');
   inputBox.addEventListener('keydown', (event) => {
     if (
       event.key === 'ArrowUp' ||
