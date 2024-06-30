@@ -40,8 +40,8 @@ export function renderPage(newCity){
 }
 
 initSearchBar(cities);
-const newCity = new City('Vancouver, BC');
-await newCity.updateAllData();
-console.log(newCity.getWeatherData());
+// const newCity = new City('Vancouver, BC');
+// await newCity.updateAllData();
+// console.log(newCity.getWeatherData());
 
-renderPage(newCity);
+// renderPage(newCity);

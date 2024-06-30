@@ -1,3 +1,9 @@
+
+@keyframes loading {
+  from { transform: rotate(0turn) } 
+  to {transform: rotate(1turn) }
+}
+
 body {
   margin: 0;
   font-family: 'Courier New';
@@ -331,4 +337,38 @@ li {
 
 .js-search-suggestion-select {
   background-color: grey;
+}
+
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(32, 43, 59);
+  z-index: 3; 
+  transition: opacity 0.75s, visibility 0.75s;
+}
+
+.loader::after {
+  content: "";
+  width: 75px;
+  height: 75px;
+  border: 15px solid ;
+  border-top-color: rgb(3, 149, 255);
+  border-radius: 50%;
+  animation: loading 0.75s ease infinite;
+}
+
+.loader--hidden {
+  opacity: 0;
+  visibility: 0;
+  /* using opacity and visibility instead of display:none to allow */ 
+}
+
+.loader--removed {
+  display: none;
 }

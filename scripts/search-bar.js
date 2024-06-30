@@ -1,10 +1,9 @@
 import { City } from './data/cities.js';
 import { renderPage } from './main.js';
+import { showLoading, hideLoading } from './loading.js';
 const resultBox = document.querySelector('.js-result-box');
 const inputBox = document.querySelector('.js-input-box');
 
-let upFired = false;
-let downFired = false;
 let results = [];
 let suggestionSelected = 0;
 
@@ -61,15 +60,15 @@ export function initSearchBar(array) {
   });
 }
 
-let resultNum = 0;
 
 async function searchResultSelected(name) {
+  showLoading();
   const city = new City(name);
   await city.updateAllData();
   renderPage(city);
   resultBox.style.display = 'none';
   inputBox.value = '';
-  resultsNum = 0;
+  hideLoading();
 }
 
 function displayResults(results, num = 5) {
